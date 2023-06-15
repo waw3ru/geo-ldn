@@ -1,0 +1,9 @@
+{
+    "editor.fontFamily": "'Jetbrains Mono','Droid Sans Mono', 'monospace', monospace",
+    "editor.fontSize": 12,
+    "isort.importStrategy": "fromEnvironment",
+    "isort.check": true,
+    "isort.logLevel": "warn",
+    "python.defaultInterpreterPath": "python3",
+    "pylint.importStrategy": "fromEnvironment"
+}
