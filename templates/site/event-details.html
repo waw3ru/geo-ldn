@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load cms_tags menu_tags sekizai_tags %}
+{% load i18n static %}
+{% block content %}
+
+        <!-- end page title section -->
+
+        <!-- start event-details section -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <!--  start event left-->
+                    <div class="col-lg-9 col-md-12 sm-margin-40px-bottom">
+                        <div class="padding-50px-right md-padding-30px-right sm-no-padding-right">
+
+                            <h2 class="margin-30px-bottom sm-margin-20px-bottom font-weight-700"><span class="text-hightlight-color"></span> {{event.name}}</h2>
+                            <div class="box-shadow-primary padding-15px-all xs-padding-10px-all bg-white margin-40px-bottom sm-margin-30px-bottom">
+                                <div class="event-img owl-carousel owl-theme">
+                                    <img src="{{event.flyer.url}}" alt="Event">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 xs-margin-15px-bottom">
+                                    <div class="row">
+                                        <div class="col-md-4 col-4 no-padding-right">
+                                            <h5 class="font-size15 no-margin-bottom padding-10px-right">Start Time:</h5>
+                                        </div>
+                                        <div class="col-md-8 col-8 no-padding">
+                                            <p class="no-margin-bottom"><i class="fas fa-calendar-alt padding-5px-right text-hightlight-color"></i> {{event.event_start_date}}</p>
+                                            <p class="no-margin-bottom"><i class="far fa-clock padding-5px-right text-hightlight-color"></i> {{event.event_start_time}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-4 col-4 no-padding-right">
+                                            <h5 class="font-size15 no-margin-bottom padding-10px-right">End Time:</h5>
+                                        </div>
+                                        <div class="col-md-8 col-8 no-padding">
+                                            <p class="no-margin-bottom"><i class="fas fa-calendar-alt padding-5px-right text-hightlight-color"></i> {{event.event_end_date}}</p>
+                                            <p class="no-margin-bottom"><i class="far fa-clock padding-5px-right text-hightlight-color"></i> {{event.event_end_time}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="separator-line-horrizontal-full bg-black opacity1 margin-40px-tb xs-margin-25px-top xs-margin-30px-bottom"></div>
+
+                            <h4 class="margin-15px-bottom">Event Details</h4>
+                            {{event.description|safe}}
+
+                            <div class="separator-line-horrizontal-full bg-black opacity1 margin-40px-tb xs-margin-25px-top xs-margin-30px-bottom"></div>
+                                <p>Virtual Link: {{event.virtual_event_link}}</p>
+                            <div class="social-icon">
+                            <h4>More Details</h4>
+                                <ul>
+                                    <li><h5 class="font-size15 no-margin-bottom padding-10px-right">Contacts:</h5> {{event.contact_mobile}}</li>
+                                    <li><h5 class="font-size15 no-margin-bottom padding-10px-right">Email:</h5> {{event.contact_email}}</li>
+                                    <li><h5 class="font-size15 no-margin-bottom padding-10px-right">Charges:</h5> {{event.charges}}</li>
+                                </ul>
+                            </div>
+                            <div class="social-icon">
+                            <h4>Share</h4>
+                                <ul>
+                                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="http://twitter.com/share?text={{ article.title }}. &url={{ request.build_absolute_uri }}"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}"><i class="fab fa-linkedin-in"></i></a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--  end event left-->
+
+                    <!--  start event right-->
+                    <div class="col-lg-3 col-md-12">
+                        <div class="side-bar">
+                            <div class="widget search">
+                                <form method='post'>
+                                    <input type="hidden" name="form-name" value="form 1" />
+                                    <input type="search" name="search" placeholder="Type here ...">
+                                    <button type="submit" class="butn theme"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </form>
+                            </div>
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h6>Latest News</h6>
+                                </div>
+                                <ul class="no-margin-bottom default-style">
+                                    <li><a href="#">Start Reading For New Subjects.</a>
+                                        <p class="no-margin-bottom">
+                                            <i class="fas fa-calendar-alt text-hightlight-color padding-10px-right"></i>15 Apr, 2019
+                                        </p>
+                                    </li>
+                                    <li><a href="#">Start New Session of Course.</a>
+                                        <p class="no-margin-bottom">
+                                            <i class="fas fa-calendar-alt text-hightlight-color padding-10px-right"></i>22 Mar, 2019
+                                        </p>
+                                    </li>
+                                    <li><a href="#">Annual Event Planning</a>
+                                        <p class="no-margin-bottom">
+                                            <i class="fas fa-calendar-alt text-hightlight-color padding-10px-right"></i>15 Feb, 2019
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h6>Other Events</h6>
+                                </div>
+                                {% for evnt in related_events %}
+                                <div class="single-post margin-25px-bottom">
+                                    <div class="recent_img">
+                                        <a href="{% url 'events:event_details' slug=evnt.slug %}" title=""><img src="{{evnt.flyer.url }}" alt="" /></a>
+                                    </div>
+                                    <div class="post_title">
+                                        <a href="{% url 'events:event_details' slug=evnt.slug %}">{{evnt.name}}</a>
+                                        <p class="margin-5px-top font-size13 no-margin-bottom">
+                                            <i class="fas fa-calendar-alt text-hightlight-color padding-10px-right"></i>{{evnt.event_start_date}}
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                            {% placeholder "sidebar_content" %}
+                        </div>
+                    </div>
+                    <!--  end event right-->
+                </div>
+            </div>
+        </section>
+        {% placeholder "contents" %}
+        <!-- end event-details section -->
+
+                 {% endblock content %}

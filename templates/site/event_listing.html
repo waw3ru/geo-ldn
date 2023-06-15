@@ -1,0 +1,27 @@
+
+<div class="row event-block">
+
+    <div class="col-md-4 col-12 xs-margin-25px-bottom">
+        <div class="box-shadow-large padding-10px-all bg-white">
+            <img src="{{instance.event.flyer.url}}" alt="" />
+        </div>
+    </div>
+
+    <div class="col-md-8 col-12">
+        <div class="padding-15px-left xs-no-padding-left">
+            <h3 class="font-size20 sm-font-size18 xs-font-size16 margin-10px-bottom"><a href="{% url 'events:event_details' slug=instance.event.slug %}">{{instance.event.name}}</a></h3>
+            <ul class="margin-10px-bottom">
+                <li class="display-inline-block margin-20px-right"><i class="fas fa-calendar-alt margin-10px-right"></i>{{instance.event.event_start_date}} - {{instance.event.event_end_date}}</li>
+                <li class="display-inline-block"><i class="far fa-clock margin-10px-right"></i>{{instance.event.event_time}}</li>
+            </ul>
+            <p><strong>Theme</strong> : {{instance.event.theme}}</p>
+            <p><strong>Organizer</strong> : {{instance.event.organiser }}</p>
+            <p>{{instance.event.description|safe|slice:":200"}}</p>
+            <div class="event-btn">
+                <a href="{% url 'events:event_details' slug=instance.event.slug %}">Read more<i class="fas fa-long-arrow-alt-right margin-10px-left"></i></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+               

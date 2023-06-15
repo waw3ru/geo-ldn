@@ -1,0 +1,9 @@
+<div class="team-style">
+    <div class="team-pic">
+        <img src="{{instance.tool.feature_image.url}}" alt="">
+    </div>
+    <div class="team-info padding-25px-tb md-padding-15px-tb padding-5px-lr">
+        <div class="team-name font-size16 xs-font-size14">{{instance.tool.name}}</div>
+        <a href="{% url 'core:tool_detail' slug=instance.tool.slug %}" class="butn">Explore Tool</a>
+    </div>
+</div>
