@@ -4,6 +4,16 @@
     "isort.importStrategy": "fromEnvironment",
     "isort.check": true,
     "isort.logLevel": "warn",
-    "python.defaultInterpreterPath": "python3",
-    "pylint.importStrategy": "fromEnvironment"
+    "python.defaultInterpreterPath": "./.venv/bin/python3",
+    "pylint.importStrategy": "fromEnvironment",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modifications",
+    "diffEditor.codeLens": true,
+    "diffEditor.diffAlgorithm": "advanced",
+    "diffEditor.experimental.collapseUnchangedRegions": true,
+    "diffEditor.experimental.useVersion2": true
 }

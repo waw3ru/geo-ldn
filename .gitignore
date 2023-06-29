@@ -50,3 +50,6 @@ Thumbs.db
 
 # Python virtualenv
 .venv/
+
+# Python bytecode
+__pycache__/
