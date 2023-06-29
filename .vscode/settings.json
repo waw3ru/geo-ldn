@@ -4,6 +4,37 @@
     "isort.importStrategy": "fromEnvironment",
     "isort.check": true,
     "isort.logLevel": "warn",
-    "python.defaultInterpreterPath": "python3",
-    "pylint.importStrategy": "fromEnvironment"
+    "python.defaultInterpreterPath": "./.venv/bin/python3",
+    "python.formatting.blackPath": "./.venv/bin/black",
+    "pylint.importStrategy": "fromEnvironment",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file"
+    },
+    "python.formatting.provider": "black",
+    "diffEditor.codeLens": true,
+    "diffEditor.diffAlgorithm": "advanced",
+    "diffEditor.experimental.collapseUnchangedRegions": true,
+    "diffEditor.experimental.useVersion2": true,
+    "cSpell.words": [
+        "ASGI",
+        "dotenv",
+        "modelcluster",
+        "taggit",
+        "WAGTAILADMIN",
+        "WAGTAILFRONTENDCACHE",
+        "zisake",
+        "ZONEID"
+    ]
 }

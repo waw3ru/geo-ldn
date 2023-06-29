@@ -50,3 +50,11 @@ Thumbs.db
 
 # Python virtualenv
 .venv/
+.env
+
+# Python bytecode
+__pycache__/
+
+# Media uploads
+uploads/**
+!uploads/.gitkeep
