@@ -8,10 +8,10 @@ const isProd = process.env.NODE_ENV === 'production';
 // Generate CSS/JS Builds
 const ctx = await esbuild.context({
     entryPoints: [
-        { in: 'scss/style.scss', out: 'zsk-assets/css/style' },
-        { in: 'ts/index.ts', out: 'zsk-assets/js/index' },
+        { in: 'scss/style.scss', out: 'zsk/css/style' },
+        { in: 'ts/index.ts', out: 'zsk/js/index' },
     ],
-    outdir: 'public',
+    outdir: 'dist',
     bundle: true,
     metafile: true,
     minify: isProd,

@@ -8,5 +8,3 @@ python3 -m venv .venv
 
 # active environment
 source ./.venv/bin/activate
-
-alias py3='.venv/bin/python3'

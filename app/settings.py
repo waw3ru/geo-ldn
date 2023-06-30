@@ -78,7 +78,7 @@ MIDDLEWARE = [
 if DEBUG:
     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
-ROOT_URLCONF = "geo_ldn.urls"
+ROOT_URLCONF = "app.urls"
 
 TEMPLATES = [
     {
@@ -96,7 +96,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "geo_ldn.wsgi.application"
+WSGI_APPLICATION = "app.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -153,6 +153,7 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STATICFILES_DIRS = [path.join(PROJECT_DIR, "dist")]
 STATIC_ROOT = path.join(PROJECT_DIR, "public")
 STATIC_URL = "/public/"
 

@@ -6,6 +6,7 @@
     "isort.logLevel": "warn",
     "python.defaultInterpreterPath": "./.venv/bin/python3",
     "python.formatting.blackPath": "./.venv/bin/black",
+    "python.formatting.blackArgs": [],
     "pylint.importStrategy": "fromEnvironment",
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
@@ -47,5 +48,6 @@
         "WAGTAILFRONTENDCACHE",
         "zisake",
         "ZONEID"
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "basic"
 }

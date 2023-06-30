@@ -1,1 +1,1 @@
-export const me = 'you!';
+export const me = 'you';
