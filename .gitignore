@@ -58,3 +58,7 @@ __pycache__/
 # Media uploads
 uploads/**
 !uploads/.gitkeep
+
+# public files
+public/**/*
+!public/.gitkeep

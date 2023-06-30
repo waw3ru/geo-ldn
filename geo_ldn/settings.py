@@ -11,10 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from os import environ, path
-from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = path.dirname(path.dirname(path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -30,6 +29,7 @@ ALLOWED_HOSTS = environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 # Application definition
 DJANGO_APPS = [
+    "django.contrib.humanize",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -57,7 +57,7 @@ WAGTAIL_APPS = [
     "taggit",
 ]
 
-INSTALLED_APPS = DJANGO_APPS + WAGTAIL_APPS
+INSTALLED_APPS = WAGTAIL_APPS + DJANGO_APPS
 
 if DEBUG:
     INSTALLED_APPS += ["debug_toolbar"]
@@ -65,6 +65,7 @@ if DEBUG:
     INTERNAL_IPS = ["127.0.0.1"]
 
 MIDDLEWARE = [
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -72,7 +73,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
 if DEBUG:
@@ -83,7 +83,7 @@ ROOT_URLCONF = "geo_ldn.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [path.join(PROJECT_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -124,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
         "OPTIONS": {
             "min_length": 9,
-            "max_length": 16,
         },
     },
     {
@@ -149,22 +148,30 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_ROOT = path.join(BASE_DIR, "assets")
-STATIC_URL = "static/"
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STATIC_ROOT = path.join(PROJECT_DIR, "public")
+STATIC_URL = "/public/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Media files uploaded by user (images / videos)
-MEDIA_ROOT = path.join(BASE_DIR, "uploads")
-MEDIA_URL = "/media/"
+MEDIA_ROOT = path.join(PROJECT_DIR, "uploads")
+MEDIA_URL = "/uploads/"
 
 # Wagtail settings
 WAGTAIL_SITE_NAME = "GEO Land Degradation Neutrality Flagship (GEO-LDN)"
-WAGTAILADMIN_BASE_URL = environ.get("BASE_URL", "http://127.0.0.1:5000") + "/cms-panel"
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
+    }
+}
+WAGTAILADMIN_BASE_URL = environ.get("BASE_URL", "http://127.0.0.1:8000")
 WAGTAIL_APPEND_SLASH = True
 WAGTAILADMIN_RECENT_EDITS_LIMIT = 5
 WAGTAIL_AUTO_UPDATE_PREVIEW_INTERVAL = 2000

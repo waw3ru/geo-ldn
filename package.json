@@ -1,0 +1,36 @@
+{
+    "name": "geo-ldn-scripts",
+    "version": "1.0.0",
+    "main": "static/index.js",
+    "scripts": {
+        "build": "node build.mjs",
+        "build:prod": "NODE_ENV=production pnpm build",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "clean:css": "pnpm exec rimraf public/css/**",
+        "clean:js": "pnpm exec rimraf public/js/**",
+        "clean": "pnpm clean:css; pnpm clean:js"
+    },
+    "keywords": [
+        "GEO-LDN"
+    ],
+    "author": {
+        "email": "hello@zisake.io",
+        "name": "Zisake Labs",
+        "url": "https://zisake.io"
+    },
+    "license": "UNLICENSED",
+    "devDependencies": {
+        "@popperjs/core": "2.11.8",
+        "@types/node": "20.3.2",
+        "autoprefixer": "10.4.14",
+        "bootstrap": "5.3.0",
+        "esbuild": "0.18.10",
+        "esbuild-sass-plugin": "2.10.0",
+        "postcss": "8.4.24",
+        "rimraf": "5.0.1",
+        "typescript": "5.1.6"
+    },
+    "dependencies": {
+        "jquery": "3.7.0"
+    }
+}

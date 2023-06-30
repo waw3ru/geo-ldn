@@ -22,6 +22,14 @@
         "editor.formatOnSave": true,
         "editor.formatOnSaveMode": "file"
     },
+    "[django-html]": {
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": true,
+            "strings": true
+        },
+        "editor.formatOnSave": false
+    },
     "python.formatting.provider": "black",
     "diffEditor.codeLens": true,
     "diffEditor.diffAlgorithm": "advanced",
@@ -30,9 +38,12 @@
     "cSpell.words": [
         "ASGI",
         "dotenv",
+        "metafile",
         "modelcluster",
+        "outdir",
         "taggit",
         "WAGTAILADMIN",
+        "wagtaildocs",
         "WAGTAILFRONTENDCACHE",
         "zisake",
         "ZONEID"

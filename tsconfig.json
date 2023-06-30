@@ -1,0 +1,15 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": "ts",
+        "sourceMap": true,
+        "declaration": true,
+        "esModuleInterop": true,
+        "importHelpers": true,
+        "lib": ["es2019", "dom"],
+        "skipLibCheck": false,
+        "skipDefaultLibCheck": false,
+        "strict": true
+    },
+    "exclude": ["node_modules"]
+}
