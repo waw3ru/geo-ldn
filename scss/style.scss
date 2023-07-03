@@ -1,10 +1,105 @@
-@import "./overrides";
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import './overrides';
+@import '../node_modules/bootstrap/scss/bootstrap';
 
-html, body {
+@import './shadows';
+@import './navbar';
+
+html,
+body {
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
     overflow: hidden auto;
+    background-color: $gray-200;
+}
+
+a {
+    text-decoration: none;
+    color: $primary;
+}
+
+a:hover {
+    color: $primary;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Raleway', sans-serif;
+}
+
+/*
+ * @note: back-to-top styling
+ */
+.back-to-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    right: 15px;
+    bottom: 15px;
+    z-index: 900;
+    background: $dark;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    block-size: 2rem;
+    transition: all 0.4s;
+
+    &:hover {
+        background: #e1444d;
+        color: #fff;
+    }
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    i {
+        font-size: 0.75rem;
+        color: $gray-100;
+        line-height: 0;
+    }
+}
+
+/*
+ * @note: header styling
+ */
+#header {
+    background: white;
+    transition: all 0.5s;
+    z-index: 997;
+    padding: 20px 0;
+}
+
+#header.header-scrolled {
+    @include floating-shadow();
+
+    padding: 12px 0;
+}
+
+#header.header-inner-pages {
+    @include normal-shadow();
+}
+
+#header .logo {
+    font-size: 28px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+#header .logo a {
+    color: $primary;
+}
+
+#header .logo img {
+    max-height: 40px;
 }

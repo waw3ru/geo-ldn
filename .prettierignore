@@ -1,5 +1,6 @@
 .venv/
-templates/
 uploads/
 public/
 node_modules/
+.vscode/
+public/

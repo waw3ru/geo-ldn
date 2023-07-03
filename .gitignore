@@ -5,7 +5,6 @@
 
 # Node artifact files
 node_modules/
-dist/
 
 # Compiled Java class files
 *.class
@@ -62,3 +61,6 @@ uploads/**
 # public files
 public/**/*
 !public/.gitkeep
+
+# dist files
+dist/

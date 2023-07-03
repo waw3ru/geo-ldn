@@ -1,19 +1,25 @@
 {% load static %}
+{% load wagtailcore_tags i18n %}
+{% wagtail_site as current_site %}
 
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="http://schema.org/WebPage">
     <head>
-        <title>{% block page_title %}{% endblock page_title %}</title>
+        <title>
+            {% block page_title %}
+            {{ current_site.site_name }}
+            {% endblock page_title %}
+        </title>
 
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
         <meta name="robots" content="index,follow" />
 
-        <meta name="author" content="GEO Land Degradation Neutrality Flagship (GEO-LDN)" />
-        <meta name="url" content="https://geo-ldn.org/" />
-
         <meta http-equiv="x-dns-prefetch-control" content="on" />
-        <meta http-equiv="Cache-Control" content="max-age=604800,stale-while-revalidate=86400" />
+        <meta
+            http-equiv="Cache-Control"
+            content="max-age=604800,stale-while-revalidate=86400"
+        />
 
         <!-- Twitter Card data https://dev.twitter.com/cards/overview -->
         {% comment %}
@@ -27,15 +33,68 @@
 
         <!-- Open Graph data http://ogp.me/ -->
         {% comment %}
-        <meta property="og:title" content="TITLE" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="url" />
         <meta property="og:image" content="IMAGE_TO_USE" />
         <meta property="og:description" content="DESCRIPTION" />
         <meta property="og:site_name" content="SITE_NAME" />
         {% endcomment %}
 
+        {% block page_seo %}
+            <meta
+                name="author"
+                content="GEO Land Degradation Neutrality Flagship (GEO-LDN)"
+            />
+             <meta name="url" content="{{ page.full_url }}" />
+
+            <meta property="og:title" content="{{ page.seo_title }}" />
+            <meta property="og:url" content="{{ page.full_url }}" />
+            <meta property="og:site_name" content="{{ current_site.site_name }}" />
+        {% endblock %}
+
+        <link rel="shortcut icon" href="{% static 'zsk/images/favicon.png' %}">
+
+        <link rel="apple-touch-icon" href="{% static 'zsk/images/apple-touch-icon-57x57.png' %}">
+
+        <link rel="apple-touch-icon" sizes="72x72" href="{% static 'zsk/images/apple-touch-icon-72x72.png' %}">
+
+        <link rel="apple-touch-icon" sizes="114x114" href="{% static 'zsk/images/apple-touch-icon-114x114.png' %}">
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/animate.min.css@0.0.3/animate.min.css"
+            integrity="sha256-H+1wJGK9cAi4t7z8xI8ra5XMwxzIjVFTp33LcTE/Xmo="
+            crossorigin="anonymous"
+        />
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css"
+            integrity="sha256-bT9i1NF5afnHDpQ4z2cQBHJQGehoEj8uvClaAG+NXS0="
+            crossorigin="anonymous"
+        />
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css"
+            integrity="sha256-BicZsQAhkGHIoR//IB2amPN5SrRb3fHB8tFsnqRAwnk="
+            crossorigin="anonymous"
+        />
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+            integrity="sha256-Yg7qJLDO4djMg5XIDylc8ue2+rliSTwmtJqNQrY6Tck="
+            crossorigin="anonymous"
+        />
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.min.css"
+        />
+
         <link href="{% static 'zsk/css/style.css' %}" rel="stylesheet" type="text/css" />
+
+        {% block page_css %} {% endblock %}
     </head>
 
     <body>
@@ -45,8 +104,29 @@
             crossorigin="anonymous"
         ></script>
 
-        <script defer async src="{% static 'zsk/js/index.js' %}"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"
+            integrity="sha256-A9/h+86SqfF/zRoVASE72CDQUKsIXDOEGasGo2MclFk="
+            crossorigin="anonymous"
+        ></script>
 
-        {% block page_content %} {% endblock %}
+        <script
+            src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"
+            integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI="
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.js"
+        ></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/dist/boxicons.min.js"></script>
+
+        <script defer src="{%static 'zsk/js/index.js' %}"></script>
+
+        {% include '_header.html' %}
+
+        {% block page_content %} {% endblock %} {% block page_scripts %} {% endblock %}
     </body>
 </html>

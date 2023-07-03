@@ -6,8 +6,6 @@ from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
-from .views import home
-
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
@@ -17,12 +15,11 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += [path("__debug__/", include("debug_toolbar.urls"))]
+    # urlpatterns += [path("__debug__/", include("debug_toolbar.urls"))]
 
 urlpatterns = urlpatterns + [
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:
-    path("", home, name="homepage"),
-    path("p/", include(wagtail_urls)),
+    path("", include(wagtail_urls)),
 ]

@@ -57,10 +57,10 @@ WAGTAIL_APPS = [
     "taggit",
 ]
 
-INSTALLED_APPS = WAGTAIL_APPS + DJANGO_APPS
+INSTALLED_APPS = ["pages.home"] + WAGTAIL_APPS + DJANGO_APPS
 
 if DEBUG:
-    INSTALLED_APPS += ["debug_toolbar"]
+    # INSTALLED_APPS += ["debug_toolbar"]
 
     INTERNAL_IPS = ["127.0.0.1"]
 
@@ -75,8 +75,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-if DEBUG:
-    MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+# if DEBUG:
+#     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
 ROOT_URLCONF = "app.urls"
 
@@ -97,6 +97,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "app.wsgi.application"
+
+CSRF_TRUSTED_ORIGINS = ["https://*.zisake.io", "https://*.127.0.0.1"]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -153,7 +155,7 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
-STATICFILES_DIRS = [path.join(PROJECT_DIR, "dist")]
+STATICFILES_DIRS = [path.join(PROJECT_DIR, "dist"), path.join(PROJECT_DIR, "static")]
 STATIC_ROOT = path.join(PROJECT_DIR, "public")
 STATIC_URL = "/public/"
 
