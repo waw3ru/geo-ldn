@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load wagtailcore_tags i18n %}
+{% wagtail_site as current_site %}
+
+{% block page_title %}
+{{ page.seo_title }}
+{% endblock page_title %}
+
+{% block page_content %}
+
+{% for item in menu_pages %}
+    <b>{{ item.title }}</b>
+{% endfor %}
+
+{% endblock page_content %}

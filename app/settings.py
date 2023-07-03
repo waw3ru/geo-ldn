@@ -57,7 +57,7 @@ WAGTAIL_APPS = [
     "taggit",
 ]
 
-INSTALLED_APPS = ["pages.home"] + WAGTAIL_APPS + DJANGO_APPS
+INSTALLED_APPS = ["pages.blog", "pages.home"] + WAGTAIL_APPS + DJANGO_APPS
 
 if DEBUG:
     # INSTALLED_APPS += ["debug_toolbar"]
@@ -194,6 +194,34 @@ WAGTAILADMIN_NOTIFICATION_INCLUDE_SUPERUSERS = DEBUG
 WAGTAIL_ENABLE_WHATS_NEW_BANNER = DEBUG
 WAGTAILAPI_SEARCH_ENABLED = DEBUG != False
 WAGTAILAPI_USE_FRONTENDCACHE = DEBUG
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    "default": {
+        "WIDGET": "wagtail.admin.rich_text.DraftailRichTextArea",
+        "OPTIONS": {
+            "features": [
+                "h1",
+                "h2",
+                "h3",
+                "h4",
+                "bold",
+                "italic",
+                "link",
+                "document-link",
+                "image",
+                "embed",
+                "superscript",
+                "subscript",
+                "strikethrough",
+                "blockquote",
+                "ol",
+                "ul",
+            ]
+        },
+    },
+    "secondary": {
+        "WIDGET": "some.external.RichTextEditor",
+    },
+}
 
 # setup frontend caching of wagtail
 if (

@@ -44,6 +44,7 @@
         "outdir",
         "taggit",
         "WAGTAILADMIN",
+        "wagtailcore",
         "wagtaildocs",
         "WAGTAILFRONTENDCACHE",
         "zisake",
