@@ -52,4 +52,6 @@ ENV ENV=production
 
 ENV NODE_ENV=production
 
+VOLUME /app
+
 CMD set -xe; python manage.py migrate --noinput; gunicorn --bind=0.0.0.0:8000 --env DJANGO_SETTINGS_MODULE=app.settings app.wsgi:application
