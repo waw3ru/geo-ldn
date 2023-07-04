@@ -14,11 +14,11 @@ RUN pnpm build:prod
 FROM python:3.8.1-slim-buster as server
 
 # Port used by this container to serve HTTP.
-EXPOSE 80
+EXPOSE 8000
 
 ENV PYTHONUNBUFFERED=1
 
-ENV PORT=80
+ENV PORT=8000
 
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
     build-essential \
@@ -52,4 +52,4 @@ ENV ENV=production
 
 ENV NODE_ENV=production
 
-CMD set -xe; python manage.py migrate --noinput; gunicorn app.wsgi:application
+CMD set -xe; python manage.py migrate --noinput; gunicorn --bind=0.0.0.0:8000 --env DJANGO_SETTINGS_MODULE=app.settings app.wsgi:application
