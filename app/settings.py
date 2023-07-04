@@ -286,7 +286,7 @@ LOGGING = {
         "file": {
             "level": "WARN",
             "class": "logging.RotatingFileHandler",
-            "filename": "your_site_name.log",
+            "filename": "geo-ldn.log",
             "maxBytes": 1024 * 1024 * 5,
             "backupCount": 4,
         },
