@@ -1,6 +1,5 @@
 # Django project
 /media/
-/static/
 *.sqlite3
 
 # Python and others
@@ -24,7 +23,6 @@ coverage
 env/
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
