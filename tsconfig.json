@@ -5,10 +5,12 @@
         "sourceMap": true,
         "declaration": true,
         "esModuleInterop": true,
-        "lib": ["es2019", "dom"],
+        "lib": ["ES2016", "dom"],
         "skipLibCheck": false,
         "skipDefaultLibCheck": false,
-        "strict": true
+        "strict": true,
+        "noImplicitAny": false,
+        "noImplicitThis": false
     },
     "exclude": ["node_modules"]
 }

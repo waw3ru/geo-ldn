@@ -1,62 +1,41 @@
-import { toggleCSS, handleScrollEffect, onEvent, selectElement } from './util';
+import { select } from './helpers';
+import { carouselScript } from './carousel';
+import { navbarScript } from './navbar';
 
-const handleCarousel = () => {
-    const indicators = selectElement('#hero-carousel-indicators') as Element;
-    const items = selectElement(
-        '#heroCarousel .carousel-item',
-        true
-    ) as NodeListOf<Element>;
+(function () {
+    // Toggle .header-scrolled class to #header when page is scrolled
+    const selectHeader = select('#header');
 
-    items.forEach((item, index) => {
-        if (index === 0) {
-            indicators.innerHTML +=
-                `<li data-bs-target='#heroCarousel' data-bs-slide-to='${index}' class='active'></li>`.trim();
-        } else {
-            indicators.innerHTML +=
-                `<li data-bs-target='#heroCarousel' data-bs-slide-to='${index}'></li>`.trim();
-        }
-    });
-};
-
-const main = () => {
-    // toggle header
-    window.addEventListener('load', () => toggleCSS('#header', 'header-scrolled'));
-    handleScrollEffect(document, () => toggleCSS('#header', 'header-scrolled'));
-
-    // toggle back-to-top
-    window.addEventListener('load', () => toggleCSS('.back-to-top', 'active'));
-    handleScrollEffect(document, () => toggleCSS('.back-to-top', '.back-to-top'));
-
-    // on mobile scroll
-    onEvent('click', '.mobile-nav-toggle', function (e) {
-        const el = selectElement('#navbar') as Element;
-
-        el.classList.toggle('navbar-mobile');
-
-        // @ts-expect-error
-        this.classList.toggle('bi-list');
-        // @ts-expect-error
-        this.classList.toggle('bi-x');
-    });
-
-    // mobile nav when active
-    onEvent(
-        'click',
-        '.navbar .dropdown > a',
-        function (e) {
-            const el = selectElement('#navbar') as Element;
-
-            if (el.classList.contains('navbar-mobile')) {
-                e.preventDefault();
-
-                // @ts-expect-error
-                this.nextElementSibling.classList.toggle('dropdown-active');
+    if (selectHeader) {
+        const headerScrolled = () => {
+            if (window.scrollY > 50) {
+                selectHeader.classList.add('header-scrolled');
+            } else {
+                selectHeader.classList.remove('header-scrolled');
             }
-        },
-        true
-    );
+        };
 
-    handleCarousel();
-};
+        window.addEventListener('load', headerScrolled);
+        window.addEventListener('scroll', headerScrolled);
+    }
 
-window.addEventListener('DOMContentLoaded', main);
+    // Back to top button
+    const backtotop = select('.back-to-top');
+
+    if (backtotop) {
+        const toggleBacktotop = () => {
+            if (window.scrollY > 100) {
+                backtotop.classList.add('active');
+            } else {
+                backtotop.classList.remove('active');
+            }
+        };
+
+        window.addEventListener('load', toggleBacktotop);
+        window.addEventListener('scroll', toggleBacktotop);
+    }
+
+    navbarScript();
+
+    carouselScript();
+})();

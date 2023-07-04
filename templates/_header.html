@@ -12,7 +12,7 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a href="{{ current_site.root_url }}" class="active"><i class='bx bx-home me-1 fs-6'></i> Home</a></li>
+                <li><a href="{{ current_site.root_url }}" class="active"><span><i class='bx bx-home me-1 fs-6'></i> Home</span></a></li>
 
                 <li class="dropdown">
                     <a href="#"><span><i class='bx bx-group me-1 fs-6'></i>  About Us</span> <i class="bi bi-chevron-down"></i></a>
@@ -40,9 +40,19 @@
                     </ul>
                 </li>
 
-                <li><a href="{{ current_site.root_url }}"><i class='bx bx-info-square me-1 fs-6'></i> News</a></li>
+                <li class="dropdown">
+                    <a href="#"><span><i class='bx bx-info-square me-1 fs-6'></i> News & Events</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="{{ current_site.root_url }}">News</a></li>
 
-                <li><a href="{{ current_site.root_url }}"><i class='bx bx-calendar-event me-1 fs-6'></i> Our Events</a></li>
+                        <li><a href="{{ current_site.root_url }}">Events</a></li>
+
+                        <li><a href="{{ current_site.root_url }}">GEO-LDN Newsletter</a></li>
+
+                        {% comment %} <li><a href="testimonials.html">Testimonials</a></li> {% endcomment %}
+                    </ul>
+                </li>
+
 
                 <li class="dropdown">
                     <a href="#"><span><i class='bx bxs-comment-dots me-1 fs-6'></i> Get Involved</span> <i class="bi bi-chevron-down"></i></a>
