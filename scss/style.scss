@@ -6,6 +6,8 @@
 @import './footer';
 @import './hero';
 @import './breadcrumbs';
+@import './header';
+@import './section';
 
 html,
 body {
@@ -39,7 +41,7 @@ h6 {
 /*
  * @note: back-to-top styling
  */
-.back-to-top {
+ .back-to-top {
     position: fixed;
     visibility: hidden;
     opacity: 0;
@@ -54,7 +56,7 @@ h6 {
     transition: all 0.4s;
 
     &:hover {
-        background: #e1444d;
+        background: $secondary;
         color: #fff;
     }
 
@@ -70,85 +72,4 @@ h6 {
     }
 }
 
-/*
- * @note: header styling
- */
-#header {
-    background: white;
-    transition: all 0.5s;
-    z-index: 997;
-    padding: 20px 0;
-}
 
-#header.header-scrolled {
-    @include floating-shadow();
-
-    padding: 12px 0;
-}
-
-#header.header-inner-pages {
-    @include normal-shadow();
-}
-
-#header .logo {
-    font-size: 28px;
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-#header .logo a {
-    color: $primary;
-}
-
-#header .logo img {
-    max-height: 40px;
-}
-
-
-section {
-    padding: 60px 0;
-    overflow: hidden;
-}
-
-.section-bg,
-.services .icon-box {
-background-color: #f8f9fa;
-}
-
-.section-title {
-padding-bottom: 40px;
-}
-
-.section-title h2 {
-font-size: 14px;
-font-weight: 500;
-padding: 0;
-line-height: 1px;
-margin: 0 0 5px 0;
-letter-spacing: 2px;
-text-transform: uppercase;
-color: #aaaaaa;
-font-family: "Poppins", sans-serif;
-}
-
-.section-title h2::after {
-content: "";
-width: 120px;
-height: 1px;
-display: inline-block;
-background: $secondary;
-margin: 4px 10px;
-}
-
-.section-title p {
-margin: 0;
-margin: 0;
-font-size: 36px;
-font-weight: 700;
-text-transform: uppercase;
-font-family: "Poppins", sans-serif;
-color: #556270;
-}

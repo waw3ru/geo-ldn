@@ -1,0 +1,33 @@
+#header {
+    background: white;
+    transition: all 0.5s;
+    z-index: 997;
+    padding: 20px 0;
+}
+
+#header.header-scrolled {
+    @include floating-shadow();
+
+    padding: 12px 0;
+}
+
+#header.header-inner-pages {
+    @include normal-shadow();
+}
+
+#header .logo {
+    font-size: 28px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+#header .logo a {
+    color: $primary;
+}
+
+#header .logo img {
+    max-height: 40px;
+}
