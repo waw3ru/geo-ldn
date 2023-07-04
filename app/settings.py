@@ -25,7 +25,7 @@ SECRET_KEY = environ.get("SECRET_KEY", "#e@7sv9=!^h-c+vn")
 DEBUG = environ.get("ENV", "development") == "development"
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 DJANGO_APPS = [
@@ -98,7 +98,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "app.wsgi.application"
 
-CSRF_TRUSTED_ORIGINS = ["https://*.nalima.digital", "https://*.127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["*"]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
