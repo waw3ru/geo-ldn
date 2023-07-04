@@ -64,6 +64,12 @@ USER wagtail
 # Collect static files.
 RUN python manage.py collectstatic --noinput --clear
 
+LABEL org.opencontainers.image.source https://github.com/zisake/geo-ldn
+
+ENV ENV=production
+
+ENV NODE_ENV=production
+
 # Runtime command that executes when "docker run" is called, it does the
 # following:
 #   1. Migrate the database.

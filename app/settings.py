@@ -106,11 +106,11 @@ CSRF_TRUSTED_ORIGINS = ["https://*.zisake.io", "https://*.127.0.0.1"]
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": "geo_ldn_db",
-        "USER": "postgres",
-        "PASSWORD": "p0stgr3s",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": environ.get("DB_NAME", "geo_ldn_db"),
+        "USER": environ.get("DB_USER", "postgres"),
+        "PASSWORD": environ.get("DB_PWD", "p0stgr3s"),
+        "HOST": environ.get("DB_HOST", "127.0.0.1"),
+        "PORT": environ.get("DB_PORT", "5432"),
     }
 }
 

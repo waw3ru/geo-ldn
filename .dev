@@ -6,5 +6,7 @@
 # generate venv
 python3 -m venv .venv
 
+ENV=development
+
 # active environment
 source ./.venv/bin/activate
