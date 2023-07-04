@@ -12,7 +12,8 @@ import dotenv
 
 from django.core.asgi import get_asgi_application
 
-dotenv.read_dotenv()
+if os.environ.get("READ_ENV", None) is not None:
+    dotenv.read_dotenv()
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings")
 
