@@ -1,0 +1,24 @@
+name: Build and publish
+
+on: workflow_dispatch
+
+jobs:
+  pull-and-build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: benjlevesque/short-sha@v2.2
+      id: short-sha
+      with:
+        variable_name: SHORT_SHA
+
+    - name: Pull, build and publish Docker image
+      uses: VaultVulp/gp-docker-action@1.6.0
+      with:
+        github-token: ${{ secrets.DOCKER_TOKEN }}
+        image-name: geo-ldn-site
+        image-tags: latest
+        additional-image-tags: ${{ steps.short-sha.outputs.sha }}
+        pull-image: true
