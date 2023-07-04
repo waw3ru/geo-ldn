@@ -174,7 +174,7 @@ WAGTAILSEARCH_BACKENDS = {
         "BACKEND": "wagtail.search.backends.database",
     }
 }
-WAGTAILADMIN_BASE_URL = environ.get("BASE_URL", "http://127.0.0.1:8000")
+WAGTAILADMIN_BASE_URL = environ.get("BASE_URL", "http://127.0.0.1:5000")
 WAGTAIL_APPEND_SLASH = True
 WAGTAILADMIN_RECENT_EDITS_LIMIT = 5
 WAGTAIL_AUTO_UPDATE_PREVIEW_INTERVAL = 2000
@@ -248,16 +248,6 @@ ADMIN = [
     ("GEO LDN", environ.get("EMAIL_ADDRESS", "test@test.com")),
 ]
 
-# Cache framework settings
-if environ.get("REDIS_URL") is not None:
-    # ensure to create database cache table i.e [$ python manage.py createcachetable]
-    CACHES = {
-        "default": {
-            "BACKEND": "django.core.cache.backends.redis.RedisCache",
-            "LOCATION": environ.get("REDIS_URL", "redis://localhost:6379"),
-        }
-    }
-
 # Web security settings
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
@@ -280,3 +270,40 @@ else:
 
 # site settings
 SITE_ID = 1
+
+# logging settings
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            "datefmt": "%d/%b/%Y %H:%M:%S",
+        },
+        "simple": {"format": "%(levelname)s %(message)s"},
+    },
+    "handlers": {
+        "file": {
+            "level": "WARN",
+            "class": "logging.RotatingFileHandler",
+            "filename": "your_site_name.log",
+            "maxBytes": 1024 * 1024 * 5,
+            "backupCount": 4,
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "propagate": True,
+            "level": "WARN",
+        },
+        "pages.home": {
+            "handlers": ["file"],
+            "level": "WARN",
+        },
+        "pages.blog": {
+            "handlers": ["file"],
+            "level": "WARN",
+        },
+    },
+}
