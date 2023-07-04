@@ -19,6 +19,6 @@ jobs:
       with:
         github-token: ${{ secrets.DOCKER_TOKEN }}
         image-name: geo-ldn-site
-        image-tags: latest
+        image-tag: latest
         additional-image-tags: ${{ steps.short-sha.outputs.sha }}
         pull-image: true
