@@ -27,3 +27,18 @@ This README would normally document whatever steps are necessary to get your app
 
 * Repo owner or admin
 * Other community or team contact
+
+### Docker deployment ###
+
+```yaml
+version: '3.8'
+
+services:
+  web:
+    image: ghcr.io/zisake/geo-ldn/geo-ldn-site:latest
+    pull_policy: always
+    restart: on-failure
+    ports:
+      - 5050:8000
+    env_file: .env # please check .env.example
+```
