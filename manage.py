@@ -10,8 +10,7 @@ import dotenv
 def main():
     """Run administrative tasks."""
 
-    if os.environ.get("ENV", "development") == "development":
-        dotenv.read_dotenv()
+    dotenv.read_dotenv()
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings")
 

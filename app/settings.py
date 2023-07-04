@@ -244,7 +244,7 @@ TAG_LIMIT = 7
 # Admins settings
 SERVER_EMAIL = environ.get("EMAIL_ADDRESS", "test@test.com")
 ADMIN = [
-    ("zisake.io", "hello@zisake.io"),
+    ("localhost", "hello@localhost"),
     ("GEO LDN", environ.get("EMAIL_ADDRESS", "test@test.com")),
 ]
 
