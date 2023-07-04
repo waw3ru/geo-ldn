@@ -285,7 +285,7 @@ LOGGING = {
     "handlers": {
         "file": {
             "level": "WARN",
-            "class": "logging.RotatingFileHandler",
+            "class": "logging.handlers.RotatingFileHandler",
             "filename": "geo-ldn.log",
             "maxBytes": 1024 * 1024 * 5,
             "backupCount": 4,
