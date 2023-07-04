@@ -83,7 +83,7 @@ class BlogPage(Page):
         context = super().get_context(request, *args, **kwargs)
         pages = []
 
-        for page in Page.objects.live().is_menu().public():
+        for page in Page.objects.live().public():
             pages.append({"title": page.title, "url": page.slug})
 
         context["menu_pages"] = pages
