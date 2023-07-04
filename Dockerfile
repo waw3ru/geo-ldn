@@ -1,18 +1,30 @@
+FROM node:18-alpine AS web
+
+RUN npm i -g pnpm
+
+WORKDIR /workspace
+
+COPY . .
+
+RUN pnpm install
+
+RUN pnpm build:prod
+
 # Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:3.8.1-slim-buster
+FROM python:3.8.1-slim-buster as server
 
 # Add user that will be used in the container.
 RUN useradd wagtail
 
 # Port used by this container to serve HTTP.
-EXPOSE 8000
+EXPOSE 80
 
 # Set environment variables.
 # 1. Force Python stdout and stderr streams to be unbuffered.
 # 2. Set PORT variable that is used by Gunicorn. This should match "EXPOSE"
 #    command.
 ENV PYTHONUNBUFFERED=1 \
-    PORT=8000
+    PORT=80
 
 # Install system packages required by Wagtail and Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
@@ -42,6 +54,8 @@ RUN chown wagtail:wagtail /app
 # Copy the source code of the project into the container.
 COPY --chown=wagtail:wagtail . .
 
+COPY --from=web /workspace/dist /app/dist
+
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
 
@@ -57,4 +71,4 @@ RUN python manage.py collectstatic --noinput --clear
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-CMD set -xe; python manage.py migrate --noinput; gunicorn geo_ldn.wsgi:application
+CMD set -xe; python manage.py migrate --noinput; gunicorn app.wsgi:application
