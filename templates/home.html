@@ -1,4 +1,4 @@
-{% extends '_base.html' %}
+{% extends 'helpers/_base.html' %}
 
 {% load static %}
 {% load wagtailcore_tags wagtailimages_tags %}
@@ -10,7 +10,7 @@
 
 {% block page_content %}
 
-{% include '_header.html' %}
+{% include 'helpers/_header.html' %}
 
 {% include 'homepage/_carousel.html' %}
 
@@ -18,6 +18,6 @@
     {% include 'homepage/_about_section.html' %}
 </main>
 
-{% include '_footer.html' %}
+{% include 'helpers/_footer.html' %}
 
 {% endblock page_content %}

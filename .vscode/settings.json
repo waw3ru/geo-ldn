@@ -42,13 +42,18 @@
         "metafile",
         "modelcluster",
         "outdir",
+        "subpage",
         "taggit",
         "WAGTAILADMIN",
         "wagtailcore",
         "wagtaildocs",
         "WAGTAILFRONTENDCACHE",
+        "wagtailimages",
         "zisake",
         "ZONEID"
     ],
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "pylint.args": [
+        "--disable=ungrouped-imports,missing-class-docstring,missing-module-docstring"
+    ]
 }

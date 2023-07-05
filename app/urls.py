@@ -20,7 +20,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # urlpatterns += [path("__debug__/", include("debug_toolbar.urls"))]
 
-if os.environ.get("IS_DOCKER", None) is not None:
+if (os.environ.get("IS_DOCKER", None) is not None) and (not settings.DEBUG):
     urlpatterns += [
         re_path(
             r"^uploads/(?P<path>.*)$",
