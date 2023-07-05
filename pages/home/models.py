@@ -1,10 +1,9 @@
 from django.db import models
+from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.models import Page, Orderable
 from wagtail import fields
 from modelcluster.fields import ParentalKey
-from pages.blocks import ButtonBlock
-from pages.home.blocks import AboutSectionBlock, FocusAreaBlock
 from pages.model_utils import PAGE_LEVELS
 
 
@@ -33,31 +32,63 @@ class HomePageCarousel(Orderable):
         default="GEO-LDN is a stakeholder-driven initiative that aims to boost co-operation between Earth observation data providers and Governments.",
     )
 
-    action_button = fields.StreamField(
-        [
-            ("call_to_action", ButtonBlock()),
-        ],
-        use_json_field=True,
-        max_num=1,
-        blank=True,
+    link = models.URLField(
+        blank=False,
+        null=False,
+        help_text="Please provide a YouTube embed link",
+        default="http://localhost:5000",
+        unique=False,
+    )
+
+    text = models.CharField(
+        max_length=50,
+        null=False,
+        blank=False,
+        default="Read More",
     )
 
     panels = [
         FieldPanel("image"),
         FieldPanel("heading"),
         FieldPanel("subheading"),
-        FieldPanel("action_button"),
+        FieldPanel("link"),
+        FieldPanel("text"),
     ]
 
 
 class HomePageAboutSection(Orderable):
     page = ParentalKey("home.HomePage", related_name="about_section")  # type: ignore
 
-    about_section_content = fields.StreamField(
+    section_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=False,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    section_heading = models.CharField(
+        null=False,
+        blank=False,
+        max_length=100,
+        default="GEO-LDN FLAGSHIP",
+    )
+
+    section_subheading = models.CharField(
+        max_length=150,
+        null=False,
+        blank=True,
+        default="Enhancing co-operation between Earth observation data providers and Governments.",
+    )
+
+    section_content = fields.StreamField(
         [
             (
                 "content",
-                AboutSectionBlock(),
+                blocks.RichTextBlock(
+                    required=False,
+                    help_text="A brief piece of information about the corporation",
+                ),
             ),
         ],
         use_json_field=True,
@@ -65,38 +96,76 @@ class HomePageAboutSection(Orderable):
         blank=True,
     )
 
-    action_button = fields.StreamField(
-        [
-            ("call_to_action", ButtonBlock()),
-        ],
-        use_json_field=True,
-        max_num=1,
-        blank=True,
+    action_link = models.URLField(
+        blank=False,
+        null=False,
+        help_text="Please provide a YouTube embed link",
+        default="http://localhost:5000",
+        unique=False,
+    )
+
+    action_text = models.CharField(
+        max_length=50,
+        null=False,
+        blank=False,
+        default="Read More",
     )
 
     panels = [
-        FieldPanel("about_section_content"),
-        FieldPanel("action_button"),
+        FieldPanel("section_image"),
+        FieldPanel("section_heading"),
+        FieldPanel("section_subheading"),
+        FieldPanel("section_content"),
+        FieldPanel("action_link"),
+        FieldPanel("action_text"),
     ]
 
 
 class HomePageKeyFocusArea(Orderable):
     page = ParentalKey("home.HomePage", related_name="key_focus_area_section")  # type: ignore
 
-    key_focus_areas = fields.StreamField(
+    focus_icon = models.CharField(
+        null=True,
+        blank=False,
+        default="ri-bubble-chart-line",
+        max_length=70,
+    )
+
+    focus_heading = models.CharField(
+        null=False,
+        blank=False,
+        max_length=150,
+        help_text="Key focus area content (not more than 250 words)",
+        default="GEO-LDN FLAGSHIP",
+    )
+
+    focus_content = fields.StreamField(
         [
             (
                 "content",
-                FocusAreaBlock(),
+                blocks.RichTextBlock(
+                    required=False,
+                    help_text="A brief piece of information about the corporation",
+                ),
             ),
         ],
         use_json_field=True,
-        max_num=6,
+        max_num=1,
         blank=True,
     )
 
+    focus_link = models.URLField(
+        blank=False,
+        null=True,
+        default="http://localhost:5000",
+        help_text="Which page to redirect to",
+    )
+
     panels = [
-        FieldPanel("key_focus_areas"),
+        FieldPanel("focus_heading"),
+        FieldPanel("focus_content"),
+        FieldPanel("focus_link"),
+        FieldPanel("focus_icon"),
     ]
 
 
@@ -129,7 +198,7 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         InlinePanel(
             "carousel_images",
-            max_num=3,
+            max_num=4,
             min_num=1,
             label="Slideshow",
             classname="collapsed",
@@ -143,8 +212,8 @@ class HomePage(Page):
         ),
         InlinePanel(
             "key_focus_area_section",
-            max_num=1,
-            min_num=1,
+            max_num=6,
+            min_num=3,
             label="Key Focus Area",
             classname="collapsed",
         ),

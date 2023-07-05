@@ -1,32 +1,30 @@
-{% load static %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static %} {% load wagtailcore_tags wagtailimages_tags %}
 
 <section id="about" class="about">
     <div class="container">
+        <div class="row content">
+            <div class="col-lg-6">
+                {% for loop_cycle in page.about_section.all %}
+                <div>
+                    {% image loop_cycle.section_image original as img %}
+                    <img src="{{ img.url }}" width="560" />
 
-      <div class="row content">
-        <div class="col-lg-6">
-          <h2>Eum ipsam laborum deleniti velitena</h2>
-          <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assum perenda sruen jonee trave</h3>
+                    <p>{{ img.alt }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-lg-6 pt-4 pt-lg-0">
+                {% for loop_cycle in page.about_section.all %}
+                    <h1 class="text-justify text-secondary font-bold">{{ loop_cycle.section_heading }}</h1>
+
+                    <h4 class="text-light-emphasis mt-1">{{ loop_cycle.section_subheading }}</h4>
+
+                    <span class="d-block mt-1 py-3 text-justify">
+                        {{ loop_cycle.section_content }}
+                    </span>
+                {% endfor %}
+            </div>
         </div>
-
-        <div class="col-lg-6 pt-4 pt-lg-0">
-          <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum
-          </p>
-          <ul>
-            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequa</li>
-            <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</li>
-          </ul>
-          <p class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
-          </p>
-        </div>
-      </div>
-
     </div>
 </section>

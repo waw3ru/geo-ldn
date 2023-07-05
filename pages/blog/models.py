@@ -78,18 +78,6 @@ class BlogPage(Page):
 
     template = "blog.html"
 
-    def get_context(self, request, *args, **kwargs):
-        """Adding HomePage to your page context."""
-        context = super().get_context(request, *args, **kwargs)
-        pages = []
-
-        for page in Page.objects.live().public():
-            pages.append({"title": page.title, "url": page.slug})
-
-        context["menu_pages"] = pages
-
-        return context
-
 
 class BlogPageRelatedLink(Orderable):
     page = ParentalKey(BlogPage, on_delete=models.CASCADE, related_name="related_links")

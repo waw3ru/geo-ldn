@@ -1,0 +1,35 @@
+{% load static %} {% load wagtailcore_tags wagtailimages_tags %}
+
+<section id="services" class="services py-5">
+    <div class="container">
+        <div class="row d-flex align-items-start">
+            {% for loop_cycle in page.key_focus_area_section.all %}
+                {% if forloop.counter == 1 %}
+                    <div class="col-md-6">
+                        <div class="icon-box">
+                            <i class="{{ loop_cycle.focus_icon }}"></i>
+                            <h4>
+                                <a href="{{ loop_cycle.focus_link }}">
+                                    {{ loop_cycle.focus_heading }}
+                                </a>
+                            </h4>
+                            <p> {{ loop_cycle.focus_content }} </p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box">
+                            <i class="{{ loop_cycle.focus_icon }}"></i>
+                            <h4>
+                                <a href="{{ loop_cycle.focus_link }}">
+                                    {{ loop_cycle.focus_heading }}
+                                </a>
+                            </h4>
+                            <p> {{ loop_cycle.focus_content }} </p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
