@@ -54,6 +54,6 @@
     ],
     "python.analysis.typeCheckingMode": "basic",
     "pylint.args": [
-        "--disable=ungrouped-imports,missing-class-docstring,missing-module-docstring"
+        "--disable=ungrouped-imports,missing-class-docstring,missing-module-docstring,line-too-long"
     ]
 }

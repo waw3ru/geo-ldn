@@ -8,3 +8,11 @@ class PictureBlock(blocks.StructBlock):
     caption = blocks.CharBlock(required=False)
 
     image = ImageChooserBlock(required=True)
+
+
+class ButtonBlock(blocks.StructBlock):
+    """for call to action buttons"""
+
+    link = blocks.URLBlock(required=True)
+
+    text = blocks.CharBlock(max_length=50, required=True)

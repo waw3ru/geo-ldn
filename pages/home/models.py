@@ -1,9 +1,10 @@
 from django.db import models
-from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.models import Page, Orderable
 from wagtail import fields
 from modelcluster.fields import ParentalKey
-from pages.home.blocks import AboutSectionBlock
+from pages.blocks import ButtonBlock
+from pages.home.blocks import AboutSectionBlock, FocusAreaBlock
 from pages.model_utils import PAGE_LEVELS
 
 
@@ -32,31 +33,70 @@ class HomePageCarousel(Orderable):
         default="GEO-LDN is a stakeholder-driven initiative that aims to boost co-operation between Earth observation data providers and Governments.",
     )
 
+    action_button = fields.StreamField(
+        [
+            ("call_to_action", ButtonBlock()),
+        ],
+        use_json_field=True,
+        max_num=1,
+        blank=True,
+    )
+
     panels = [
         FieldPanel("image"),
         FieldPanel("heading"),
         FieldPanel("subheading"),
+        FieldPanel("action_button"),
     ]
 
 
 class HomePageAboutSection(Orderable):
     page = ParentalKey("home.HomePage", related_name="about_section")  # type: ignore
 
-    body = fields.StreamField(
-        AboutSectionBlock(),
+    about_section_content = fields.StreamField(
+        [
+            (
+                "content",
+                AboutSectionBlock(),
+            ),
+        ],
         use_json_field=True,
-        min_num=1,
-        max_num=4,
-        block_counts={
-            "image": {"max_num": 2},
-            "heading": {"max_num": 1},
-            "section_content": {"max_num": 1},
-            "subheading": {"max_num": 1},
-        },
+        max_num=1,
+        blank=True,
+    )
+
+    action_button = fields.StreamField(
+        [
+            ("call_to_action", ButtonBlock()),
+        ],
+        use_json_field=True,
+        max_num=1,
+        blank=True,
     )
 
     panels = [
-        FieldPanel("body"),
+        FieldPanel("about_section_content"),
+        FieldPanel("action_button"),
+    ]
+
+
+class HomePageKeyFocusArea(Orderable):
+    page = ParentalKey("home.HomePage", related_name="key_focus_area_section")  # type: ignore
+
+    key_focus_areas = fields.StreamField(
+        [
+            (
+                "content",
+                FocusAreaBlock(),
+            ),
+        ],
+        use_json_field=True,
+        max_num=6,
+        blank=True,
+    )
+
+    panels = [
+        FieldPanel("key_focus_areas"),
     ]
 
 
@@ -87,24 +127,26 @@ class HomePage(Page):
     )
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                InlinePanel(
-                    "carousel_images",
-                    max_num=3,
-                    min_num=1,
-                    label="Header Slideshow Image",
-                    classname="collapsed",
-                ),
-                InlinePanel(
-                    "about_section",
-                    max_num=1,
-                    min_num=1,
-                    label="Page Content",
-                    classname="collapsed",
-                ),
-            ],
-            heading="Homepage Content",
+        InlinePanel(
+            "carousel_images",
+            max_num=3,
+            min_num=1,
+            label="Slideshow",
+            classname="collapsed",
+        ),
+        InlinePanel(
+            "about_section",
+            max_num=1,
+            min_num=1,
+            label="About Section",
+            classname="collapsed",
+        ),
+        InlinePanel(
+            "key_focus_area_section",
+            max_num=1,
+            min_num=1,
+            label="Key Focus Area",
+            classname="collapsed",
         ),
         FieldPanel("video_link"),
         FieldPanel("video_caption"),
