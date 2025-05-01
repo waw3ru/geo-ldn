@@ -98,7 +98,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "app.wsgi.application"
 
-CSRF_TRUSTED_ORIGINS = ["https://*.nalima.digital", "https://*.127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://*.127.0.0.1"]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -108,7 +108,7 @@ DATABASES = {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": environ.get("DB_NAME", "geo_ldn_db"),
         "USER": environ.get("DB_USER", "postgres"),
-        "PASSWORD": environ.get("DB_PWD", "p0stgr3s"),
+        "PASSWORD": environ.get("DB_PWD", "****"),
         "HOST": environ.get("DB_HOST", "127.0.0.1"),
         "PORT": environ.get("DB_PORT", "5432"),
     }
